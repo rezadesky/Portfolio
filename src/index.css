@@ -1,0 +1,110 @@
+@import "@fontsource/plus-jakarta-sans/latin-400.css";
+@import "@fontsource/plus-jakarta-sans/latin-500.css";
+@import "@fontsource/plus-jakarta-sans/latin-600.css";
+@import "@fontsource/plus-jakarta-sans/latin-700.css";
+@import "@fontsource/plus-jakarta-sans/latin-800.css";
+@import "@fontsource/imperial-script/latin.css";
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'Plus Jakarta Sans', sans-serif;
+  --font-script: 'Imperial Script', cursive;
+  --animate-fade-in: fade-in 0.18s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in {
+    animation: none;
+  }
+}
+
+.font-imperial {
+  font-family: 'Imperial Script', cursive !important;
+}
+
+@layer base {
+  :root, .dark {
+    --background: 348 70% 2.5%;
+    --foreground: 0 0% 96%;
+    --card: 350 55% 5%;
+    --card-foreground: 0 0% 96%;
+    --popover: 350 55% 5%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 348 80% 44%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 350 40% 9%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 350 35% 8.5%;
+    --muted-foreground: 350 15% 58%;
+    --accent: 348 50% 12%;
+    --accent-foreground: 348 80% 90%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 350 35% 11%;
+    --input: 350 35% 11%;
+    --ring: 348 80% 44%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    letter-spacing: -0.01em;
+    line-height: 1.6;
+  }
+
+  code, kbd, pre, input, textarea, button, select {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+  }
+
+  /* Premium scrollbar */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.5);
+  }
+
+  /* Selection */
+  ::selection {
+    background: hsl(var(--primary) / 0.35);
+    color: hsl(var(--foreground));
+  }
+
+  /* Focus ring */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring) / 0.6);
+    outline-offset: 2px;
+  }
+}

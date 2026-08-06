@@ -1,0 +1,17 @@
+{
+  "name": "Portofolio Reza Saputra",
+  "short_name": "Reza Saputra",
+  "description": "Portofolio Reza Saputra — Full Stack Web Developer dari Indonesia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b0103",
+  "theme_color": "#0b0103",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
