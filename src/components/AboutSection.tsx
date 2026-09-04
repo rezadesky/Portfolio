@@ -4,7 +4,7 @@ import {
   GraduationCap, Briefcase, Target, MapPin,
   Code2, Globe, ArrowRight, Sparkles,
 } from "lucide-react"
-import { profileData } from "@/data/portfolioData"
+import { profileData, experiencesData, projectsData, skillsCategories } from "@/data/portfolioData"
 import type { NavTab } from "./Sidebar"
 
 interface AboutSectionProps {
@@ -12,13 +12,15 @@ interface AboutSectionProps {
 }
 
 const StatCard = ({ value, label }: { value: string; label: string }) => (
-  <div className="text-center p-3 sm:p-4 rounded-xl border border-white/6 bg-white/[0.025]">
-    <div className="text-lg sm:text-xl font-extrabold text-white">{value}</div>
+  <div className="text-center p-3 sm:p-4 rounded-xl border border-white/6 bg-white/[0.025] hover:border-rose-900/40 hover:bg-white/[0.04] transition-all duration-200">
+    <div className="text-lg sm:text-2xl font-extrabold text-white">{value}</div>
     <div className="text-[10px] sm:text-[11px] text-muted-foreground mt-0.5 font-mono uppercase tracking-wider">{label}</div>
   </div>
 )
 
 export const AboutSection: React.FC<AboutSectionProps> = ({ setActiveTab }) => {
+  const totalSkills = skillsCategories.reduce((acc, cat) => acc + cat.items.length, 0)
+
   const infoItems = [
     { label: "Nama", value: profileData.name, icon: User },
     { label: "Pendidikan", value: profileData.education, icon: GraduationCap },
@@ -48,9 +50,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ setActiveTab }) => {
 
       {/* ── Stats Row ── */}
       <div className="grid grid-cols-3 gap-2 sm:gap-3">
-        <StatCard value="2023" label="Mulai Belajar" />
-        <StatCard value="4+" label="Proyek" />
-        <StatCard value="6+" label="Teknologi" />
+        <StatCard value={`${projectsData.length}`} label="Proyek Website" />
+        <StatCard value={`${experiencesData.length}`} label="Pengalaman" />
+        <StatCard value={`${totalSkills}+`} label="Skill & Tools" />
       </div>
 
       {/* ── Bio Cards ── */}

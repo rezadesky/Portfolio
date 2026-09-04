@@ -21,6 +21,26 @@ export const TechLogo: React.FC<{ name: string; className?: string }> = ({ name,
           <path d="M3 3h18v18H3V3zm10.5 13.5v-6H12v6h1.5zm3-1.5h1.5V12h-3v4.5h1.5v-1.5z" />
         </svg>
       )
+    case "React":
+    case "React.js":
+      return (
+        <svg className={className} viewBox="-11.5 -10.23 23 20.46">
+          <circle cx="0" cy="0" r="2.05" fill="#61DAFB"/>
+          <g stroke="#61DAFB" strokeWidth="1" fill="none">
+            <ellipse rx="11" ry="4.2"/>
+            <ellipse rx="11" ry="4.2" transform="rotate(60)"/>
+            <ellipse rx="11" ry="4.2" transform="rotate(120)"/>
+          </g>
+        </svg>
+      )
+    case "Vue":
+    case "Vue.js":
+      return (
+        <svg className={className} viewBox="0 0 24 24">
+          <path d="M2 3h3.5L12 15 20.5 3H24L12 21 0 3h2z" fill="#41B883"/>
+          <path d="M6.5 3h3.5L12 6.5 14 3h3.5L12 12 6.5 3z" fill="#35495E"/>
+        </svg>
+      )
     case "Bootstrap":
       return (
         <svg className={className} viewBox="0 0 24 24" fill="#7952B3">
@@ -43,6 +63,13 @@ export const TechLogo: React.FC<{ name: string; className?: string }> = ({ name,
       return (
         <svg className={className} viewBox="0 0 24 24" fill="#FF2D20">
           <path d="M11.9 1L.5 7.6v13.2l11.4 6.6 11.4-6.6V7.6L11.9 1zm9.6 19.8l-9.6 5.6-9.6-5.6V9l9.6-5.6 9.6 5.6v11.8z" />
+        </svg>
+      )
+    case "Next.js":
+    case "NextJS":
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.82 17.5l-6.9-9.92h-1.63v9.92h1.49v-7.23l6.04 8.71a9.92 9.92 0 01-1.0.52zm-1.82-9.92h1.56v5.22l-1.56-2.26v-2.96z" />
         </svg>
       )
     case "MySQL":
@@ -74,6 +101,12 @@ export const TechLogo: React.FC<{ name: string; className?: string }> = ({ name,
       return (
         <svg className={className} viewBox="0 0 24 24" fill="#F24E1E">
           <path d="M8 24c2.2 0 4-1.8 4-4v-4H8c-2.2 0-4 1.8-4 4s1.8 4 4 4zm0-24C5.8 0 4 1.8 4 4s1.8 4 4 4h4V4c0-2.2-1.8-4-4-4zm0 8c-2.2 0-4 1.8-4 4s1.8 4 4 4h4v-8H8zm8 0c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4zm0-8c-2.2 0-4 1.8-4 4h4c2.2 0 4-1.8 4-4s-1.8-4-4-4z" />
+        </svg>
+      )
+    case "WordPress":
+      return (
+        <svg className={className} viewBox="0 0 24 24" fill="#21759B">
+          <path d="M12.158 0C5.457 0 0 5.457 0 12.158c0 5.464 3.612 10.082 8.57 11.666L4.258 12.01c-.482-1.312-.667-2.378-.667-3.18 0-1.787.973-2.905 2.213-2.905.973 0 1.706.594 1.706 1.637 0 1.255-.747 2.87-1.157 4.195-.27.89.378 1.637 1.26 1.637 1.512 0 2.684-1.583 2.684-3.76 0-1.96-1.323-3.268-3.323-3.268-2.428 0-3.924 1.836-3.924 4.095 0 1.053.378 1.944.972 2.538l-2.43 6.945C1.158 17.587 0 15.016 0 12.158 0 5.457 5.457 0 12.158 0c2.435 0 4.697.718 6.594 1.957L16.29 8.288c-.62-1.107-1.485-1.637-2.457-1.637-1.458 0-2.403 1.053-2.403 2.403 0 1.107.567 2.052 1.485 2.7l-3.762 10.74C14.072 23.633 18.064 21.054 19.89 17.15c-.243-.027-.513-.054-.81-.054-1.323 0-2.484.567-3.294 1.485l-3.626-18.523z" />
         </svg>
       )
     case "XAMPP":

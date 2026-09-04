@@ -4,7 +4,7 @@ import {
   ChevronLeft, ChevronRight, BadgeCheck, Phone, MapPin,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { profileData } from "@/data/portfolioData"
+import { profileData, projectsData } from "@/data/portfolioData"
 
 /* ── Inline SVG icons ── */
 const GithubIcon = ({ className }: { className?: string }) => (
@@ -36,7 +36,7 @@ interface SidebarProps {
 export const navItems: NavItem[] = [
   { id: "about",      label: "About",      icon: User       },
   { id: "skills",     label: "Skills",     icon: Cpu        },
-  { id: "projects",   label: "Projects",   icon: FolderGit2, count: "4" },
+  { id: "projects",   label: "Projects",   icon: FolderGit2, count: projectsData.length.toString() },
   { id: "experience", label: "Experience", icon: Briefcase  },
   { id: "contact",    label: "Contact",    icon: Mail       },
 ]
@@ -48,17 +48,10 @@ const socialLinks = [
   { href: (d: typeof profileData) => `https://wa.me/${d.whatsapp.replace(/[^0-9]/g, "")}`, icon: Phone, label: "WhatsApp", color: "hover:text-emerald-400" },
 ]
 
-/* ── Imperial-style name: "R"eza "S"aputra ── */
+/* ── Normal-styled name ── */
 const StyledName = ({ name }: { name: string }) => (
-  <span className="flex items-baseline gap-0 select-none leading-none">
-    {name.split(" ").map((word, i, arr) => (
-      <span key={i} className="flex items-baseline">
-        <span className="font-imperial text-[22px] text-rose-500 leading-none">{word[0]}</span>
-        <span className="font-bold text-white text-[13px] tracking-tight">
-          {word.slice(1)}{i < arr.length - 1 ? "\u00a0" : ""}
-        </span>
-      </span>
-    ))}
+  <span className="font-semibold text-white text-sm tracking-tight select-none">
+    {name}
   </span>
 )
 
@@ -118,9 +111,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <div className="p-4 flex flex-col items-center text-center gap-3">
           {/* Avatar */}
           <div className="relative mt-1">
-            <div className="w-[60px] h-[60px] rounded-full bg-gradient-to-br from-rose-900 via-rose-800 to-zinc-900 flex items-center justify-center text-white font-black text-lg ring-2 ring-rose-700/30 ring-offset-2 ring-offset-[#090102] shadow-lg">
-              RZ
-            </div>
+            <img
+              src={profileData.avatar}
+              alt={profileData.name}
+              className="w-[60px] h-[60px] rounded-full object-cover ring-2 ring-rose-700/40 ring-offset-2 ring-offset-[#090102] shadow-lg"
+            />
             <span className="absolute bottom-0.5 right-0.5 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-[#090102]" />
           </div>
 
@@ -151,9 +146,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
     ) : (
       <div className="flex justify-center py-4">
         <div className="relative">
-          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-rose-900 to-zinc-900 flex items-center justify-center text-white font-black text-[11px] ring-1 ring-rose-800/30">
-            RZ
-          </div>
+          <img
+            src={profileData.avatar}
+            alt={profileData.name}
+            className="w-9 h-9 rounded-full object-cover ring-1 ring-rose-800/40"
+          />
           <span className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-[1.5px] ring-[#090102]" />
         </div>
       </div>
@@ -242,13 +239,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </a>
         ))}
       </div>
-
-      {/* Version */}
-      {!isCollapsed && (
-        <p className="text-[9px] font-mono text-center text-muted-foreground/30 tracking-widest uppercase">
-          v1.0.0 · Portfolio Reza
-        </p>
-      )}
     </div>
   </aside>
 )

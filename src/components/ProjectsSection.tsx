@@ -26,24 +26,23 @@ export const ProjectsSection: React.FC = () => (
 
     {/* ── Cards ── */}
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
-      {projectsData.map((project) => (
+      {projectsData.map((project, index) => (
         <div
           key={project.id}
           className="group rounded-2xl border border-white/6 bg-white/[0.025] hover:border-rose-900/40 hover:bg-white/[0.04] transition-all duration-300 overflow-hidden flex flex-col"
         >
-          {/* Image */}
-          <div className="relative h-36 sm:h-40 overflow-hidden bg-rose-950/30">
+          {/* Image container - fits exact image aspect ratio */}
+          <div className="relative w-full overflow-hidden bg-rose-950/20 border-b border-white/5">
             <img
               src={project.image}
               alt={project.title}
-              width={800}
-              height={600}
-              loading="lazy"
+              loading={index < 2 ? "eager" : "lazy"}
+              fetchPriority={index < 2 ? "high" : "low"}
               decoding="async"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+              className="w-full h-auto block object-cover group-hover:scale-102 transition-transform duration-500"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0b0103] via-transparent to-transparent" />
-            <span className="absolute bottom-2 left-3 text-[9px] sm:text-[10px] font-mono px-2 py-0.5 rounded-md bg-black/60 text-rose-300 border border-rose-900/40 backdrop-blur-sm uppercase tracking-wider">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#090102]/80 via-transparent to-transparent opacity-40 pointer-events-none" />
+            <span className="absolute bottom-2.5 left-3 text-[9px] sm:text-[10px] font-mono px-2.5 py-0.5 rounded-md bg-black/80 text-rose-300 border border-rose-900/40 backdrop-blur-sm uppercase tracking-wider z-10 shadow-md">
               {project.category}
             </span>
           </div>
@@ -95,24 +94,28 @@ export const ProjectsSection: React.FC = () => (
 
           {/* Footer */}
           <div className="px-4 sm:px-5 py-3 border-t border-white/5 flex items-center gap-2">
-            <a
-              href={project.demoUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl bg-rose-700 hover:bg-rose-600 text-white text-[11px] sm:text-[12px] font-bold transition-colors cursor-pointer"
-            >
-              <ExternalLink className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-              Demo
-            </a>
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="flex-1 flex items-center justify-center gap-1.5 py-2 rounded-xl border border-white/8 bg-white/[0.03] hover:bg-white/[0.07] text-foreground text-[11px] sm:text-[12px] font-bold transition-colors cursor-pointer"
-            >
-              <GithubIcon className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
-              Source
-            </a>
+            {project.demoUrl && (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-rose-700 hover:bg-rose-600 text-white text-[11px] sm:text-[12px] font-bold transition-colors cursor-pointer shadow-sm"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                Live Demo
+              </a>
+            )}
+            {project.githubUrl && (
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl border border-white/8 bg-white/[0.03] hover:bg-white/[0.07] text-foreground text-[11px] sm:text-[12px] font-bold transition-colors cursor-pointer"
+              >
+                <GithubIcon className="w-3.5 h-3.5" />
+                Source Code
+              </a>
+            )}
           </div>
         </div>
       ))}
