@@ -2,6 +2,9 @@ import React, { useState } from "react"
 import { Mail, Phone, MapPin, Send, MessageSquare, ArrowUpRight, CheckCircle2 } from "lucide-react"
 import { profileData } from "@/data/portfolioData"
 import { TechLogo } from "./TechLogos"
+import { SectionHeading } from "./SectionHeading"
+import { Reveal } from "./Reveal"
+import { SpotlightCard } from "./SpotlightCard"
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -14,15 +17,15 @@ const InstagramIcon = ({ className }: { className?: string }) => (
   </svg>
 )
 
-const inputCls = "w-full px-3.5 sm:px-4 py-2.5 rounded-xl border border-white/8 bg-white/[0.03] text-[12px] sm:text-[13px] text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-rose-700/60 focus:bg-white/[0.05] transition-all"
+const inputCls = "w-full px-4 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] text-[13px] text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-rose-600/60 focus:bg-white/[0.045] focus:ring-2 focus:ring-rose-900/40 transition-all"
 
 const contactCards = [
-  { href: (d: typeof profileData) => `mailto:${d.email}`, icon: <Mail className="w-3.5 h-3.5 sm:w-4 sm:h-4" />, iconColor: "text-rose-400", label: "Email", value: (d: typeof profileData) => d.email },
-  { href: (d: typeof profileData) => `https://wa.me/${d.whatsapp.replace(/[^0-9]/g, "")}`, icon: <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4" />, iconColor: "text-emerald-400", label: "WhatsApp", value: (d: typeof profileData) => d.whatsapp },
-  { href: (d: typeof profileData) => d.github, icon: <GithubIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />, iconColor: "text-foreground", label: "GitHub", value: () => "github.com/rezadesky" },
-  { href: (d: typeof profileData) => d.linkedin, icon: <TechLogo name="LinkedIn" className="w-3.5 h-3.5 sm:w-4 sm:h-4" />, iconColor: "text-sky-400", label: "LinkedIn", value: () => "linkedin.com/in/reza-saputra" },
-  { href: (d: typeof profileData) => d.instagram, icon: <InstagramIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />, iconColor: "text-pink-400", label: "Instagram", value: () => "@reza_dsky" },
-  { noLink: true, href: () => "#", icon: <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />, iconColor: "text-rose-400", label: "Lokasi", value: (d: typeof profileData) => d.location },
+  { href: (d: typeof profileData) => `mailto:${d.email}`, icon: <Mail className="w-4 h-4" />, iconColor: "text-rose-400", label: "Email", value: (d: typeof profileData) => d.email },
+  { href: (d: typeof profileData) => `https://wa.me/${d.whatsapp.replace(/[^0-9]/g, "")}`, icon: <Phone className="w-4 h-4" />, iconColor: "text-emerald-400", label: "WhatsApp", value: (d: typeof profileData) => d.whatsapp },
+  { href: (d: typeof profileData) => d.github, icon: <GithubIcon className="w-4 h-4" />, iconColor: "text-foreground", label: "GitHub", value: () => "github.com/rezadesky" },
+  { href: (d: typeof profileData) => d.linkedin, icon: <TechLogo name="LinkedIn" className="w-4 h-4" />, iconColor: "text-sky-400", label: "LinkedIn", value: () => "linkedin.com/in/reza-saputra" },
+  { href: (d: typeof profileData) => d.instagram, icon: <InstagramIcon className="w-4 h-4" />, iconColor: "text-pink-400", label: "Instagram", value: () => "@reza_dsky" },
+  { noLink: true, href: () => "#", icon: <MapPin className="w-4 h-4" />, iconColor: "text-rose-400", label: "Lokasi", value: (d: typeof profileData) => d.location },
 ]
 
 export const ContactSection: React.FC = () => {
@@ -43,68 +46,54 @@ export const ContactSection: React.FC = () => {
   }
 
   return (
-    <div className="space-y-7 sm:space-y-10 pb-4">
+    <div className="space-y-8 sm:space-y-12 pb-4">
 
       {/* ── Header ── */}
-      <div className="space-y-2 sm:space-y-3">
-        <h2 aria-label="Kontak" className="flex items-baseline gap-1.5 select-none">
-          <span aria-hidden="true" className="font-imperial text-6xl sm:text-7xl text-rose-500 leading-none">C</span>
-          <span aria-hidden="true" className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">ontact</span>
-        </h2>
-        <p className="text-xs sm:text-sm text-muted-foreground max-w-xl leading-relaxed">
-          {profileData.contactDescription}
-        </p>
-        <div className="w-10 h-[2px] bg-gradient-to-r from-rose-600 to-rose-900/0 rounded-full" />
-      </div>
+      <SectionHeading
+        script="C"
+        rest="ontact"
+        ariaLabel="Kontak"
+        index="05"
+        description={profileData.contactDescription}
+      />
 
       {/* ── Contact Cards ── */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3">
-        {contactCards.map((card) =>
-          card.noLink ? (
-            <div
-              key={card.label}
-              className="p-3 sm:p-4 rounded-2xl border border-white/6 bg-white/[0.025] space-y-2 sm:space-y-3"
-            >
-              <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-white/[0.04] border border-white/6 flex items-center justify-center ${card.iconColor}`}>
-                {card.icon}
-              </div>
-              <div>
-                <div className="text-[9px] sm:text-[10px] font-mono text-muted-foreground uppercase tracking-wider">{card.label}</div>
-                <div className="text-[11px] sm:text-[12px] font-semibold text-foreground mt-0.5 truncate">{card.value(profileData)}</div>
-              </div>
-            </div>
-          ) : (
-            <a
-              key={card.label}
-              href={card.href(profileData)}
-              target="_blank"
-              rel="noreferrer"
-              className="group p-3 sm:p-4 rounded-2xl border border-white/6 bg-white/[0.025] hover:border-rose-900/40 hover:bg-white/[0.04] transition-all duration-200 space-y-2 sm:space-y-3"
+        {contactCards.map((card, idx) => (
+          <Reveal key={card.label} delay={Math.min(idx * 0.05, 0.3)}>
+            <SpotlightCard
+              className="group h-full p-4 rounded-2xl border border-white/[0.07] bg-gradient-to-b from-white/[0.04] to-white/[0.015] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:border-rose-900/50 hover:bg-white/[0.045] transition-all duration-200 space-y-2.5"
+              href={card.noLink ? undefined : card.href(profileData)}
+              target={card.noLink ? undefined : "_blank"}
+              rel={card.noLink ? undefined : "noreferrer"}
             >
               <div className="flex items-center justify-between">
-                <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-white/[0.04] border border-white/6 group-hover:scale-110 transition-transform flex items-center justify-center ${card.iconColor}`}>
+                <div className={`w-9 h-9 rounded-xl bg-white/[0.04] border border-white/[0.06] group-hover:scale-110 group-hover:border-rose-900/40 transition-all flex items-center justify-center ${card.iconColor}`}>
                   {card.icon}
                 </div>
-                <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-muted-foreground/40 group-hover:text-rose-400 transition-colors" />
+                {card.noLink ? null : (
+                  <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground/40 group-hover:text-rose-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" />
+                )}
               </div>
               <div>
-                <div className="text-[9px] sm:text-[10px] font-mono text-muted-foreground uppercase tracking-wider">{card.label}</div>
-                <div className="text-[11px] sm:text-[12px] font-semibold text-foreground mt-0.5 truncate">{card.value(profileData)}</div>
+                <div className="text-[9px] sm:text-[10px] font-mono text-muted-foreground/70 uppercase tracking-[0.18em]">{card.label}</div>
+                <div className="text-[12px] sm:text-[13px] font-semibold text-foreground mt-0.5 truncate">{card.value(profileData)}</div>
               </div>
-            </a>
-          )
-        )}
+            </SpotlightCard>
+          </Reveal>
+        ))}
       </div>
 
       {/* ── Form ── */}
-      <div className="rounded-2xl border border-white/6 bg-white/[0.025] p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
-        <div className="flex items-center gap-2 sm:gap-2.5">
-          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-rose-950/60 border border-rose-900/30 flex items-center justify-center shrink-0">
-            <MessageSquare className="w-3.5 h-3.5 text-rose-400" />
+      <Reveal delay={0.06}>
+      <div className="rounded-2xl border border-white/[0.07] bg-gradient-to-b from-white/[0.04] to-white/[0.015] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] p-5 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-rose-950/60 border border-rose-900/30 flex items-center justify-center shrink-0">
+            <MessageSquare className="w-4 h-4 text-rose-400" />
           </div>
           <div>
-            <h3 className="text-[13px] sm:text-sm font-bold text-white">Kirim Pesan Langsung</h3>
-            <p className="text-[10px] sm:text-[11px] text-muted-foreground">Respons dalam 1-2 hari kerja</p>
+            <h3 className="text-sm font-bold text-white">Kirim Pesan Langsung</h3>
+            <p className="text-[11px] text-muted-foreground/70">Respons dalam 1-2 hari kerja</p>
           </div>
         </div>
 
@@ -112,24 +101,24 @@ export const ContactSection: React.FC = () => {
 
         {formSubmitted ? (
           <div role="status" className="py-8 sm:py-10 text-center space-y-2 sm:space-y-3">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-rose-950/60 border border-rose-700/40 flex items-center justify-center mx-auto">
-              <CheckCircle2 className="w-6 h-6 sm:w-7 sm:h-7 text-rose-400" />
+            <div className="w-14 h-14 rounded-full bg-rose-950/60 border border-rose-700/40 flex items-center justify-center mx-auto">
+              <CheckCircle2 className="w-7 h-7 text-rose-400" />
             </div>
-            <h4 className="text-sm sm:text-base font-extrabold text-white">Pesan Terkirim!</h4>
-            <p className="text-[11px] sm:text-[13px] text-muted-foreground">Terima kasih! Saya akan segera merespons.</p>
+            <h4 className="text-base font-extrabold text-white">Pesan Terkirim!</h4>
+            <p className="text-[13px] text-muted-foreground">Terima kasih! Saya akan segera merespons.</p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-1.5">
-                <label htmlFor="contact-name" className="text-[10px] sm:text-[11px] font-semibold font-mono text-muted-foreground uppercase tracking-wider">Nama *</label>
+                <label htmlFor="contact-name" className="text-[10px] font-semibold font-mono text-muted-foreground/70 uppercase tracking-[0.18em]">Nama *</label>
                 <input id="contact-name" type="text" required placeholder="Nama lengkap" value={formData.name}
                   autoComplete="name"
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className={inputCls} />
               </div>
               <div className="space-y-1.5">
-                <label htmlFor="contact-email" className="text-[10px] sm:text-[11px] font-semibold font-mono text-muted-foreground uppercase tracking-wider">Email *</label>
+                <label htmlFor="contact-email" className="text-[10px] font-semibold font-mono text-muted-foreground/70 uppercase tracking-[0.18em]">Email *</label>
                 <input id="contact-email" type="email" required placeholder="email@contoh.com" value={formData.email}
                   autoComplete="email"
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -138,33 +127,36 @@ export const ContactSection: React.FC = () => {
             </div>
 
             <div className="space-y-1.5">
-              <label htmlFor="contact-subject" className="text-[10px] sm:text-[11px] font-semibold font-mono text-muted-foreground uppercase tracking-wider">Subjek</label>
+              <label htmlFor="contact-subject" className="text-[10px] font-semibold font-mono text-muted-foreground/70 uppercase tracking-[0.18em]">Subjek</label>
               <input id="contact-subject" type="text" placeholder="Diskusi Proyek / Kolaborasi" value={formData.subject}
                 onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                 className={inputCls} />
             </div>
 
             <div className="space-y-1.5">
-              <label htmlFor="contact-message" className="text-[10px] sm:text-[11px] font-semibold font-mono text-muted-foreground uppercase tracking-wider">Pesan *</label>
+              <label htmlFor="contact-message" className="text-[10px] font-semibold font-mono text-muted-foreground/70 uppercase tracking-[0.18em]">Pesan *</label>
               <textarea id="contact-message" required rows={4} placeholder="Tuliskan pesan Anda..." value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 className={`${inputCls} resize-none`} />
             </div>
 
             <button type="submit"
-              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-rose-700 hover:bg-rose-600 text-white text-[12px] sm:text-[13px] font-bold transition-colors cursor-pointer w-full sm:w-auto justify-center sm:justify-start">
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-rose-700 hover:bg-rose-600 text-white text-[13px] font-bold transition-all cursor-pointer w-full sm:w-auto justify-center sm:justify-start shadow-[0_10px_24px_-12px_rgba(225,29,72,0.6)] hover:shadow-[0_12px_28px_-10px_rgba(225,29,72,0.7)] hover:-translate-y-px">
               <Send className="w-3.5 h-3.5" />
               Kirim Pesan
             </button>
           </form>
         )}
       </div>
+      </Reveal>
 
       {/* ── CTA Banner ── */}
-      <div className="rounded-2xl border border-rose-900/30 bg-gradient-to-r from-rose-950/50 via-rose-950/20 to-transparent p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4">
-        <div className="space-y-0.5 sm:space-y-1">
-          <h3 className="text-sm sm:text-base font-extrabold text-white">{profileData.contactCtaHeading}</h3>
-          <p className="text-[11px] sm:text-[13px] text-muted-foreground">{profileData.contactCtaBody}</p>
+      <Reveal delay={0.08}>
+      <div className="relative rounded-2xl border border-rose-900/40 bg-rose-950/20 p-5 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 overflow-hidden">
+        <div aria-hidden="true" className="absolute left-0 top-0 bottom-0 w-[3px] bg-gradient-to-b from-rose-600/80 via-rose-800/40 to-transparent" />
+        <div className="space-y-1">
+          <h3 className="text-base sm:text-lg font-extrabold text-white tracking-tight">{profileData.contactCtaHeading}</h3>
+          <p className="text-[13px] text-muted-foreground">{profileData.contactCtaBody}</p>
         </div>
         <div className="flex flex-wrap gap-2 w-full sm:w-auto">
           {[
@@ -173,13 +165,14 @@ export const ContactSection: React.FC = () => {
             { href: `mailto:${profileData.email}`, icon: <Mail className="w-3.5 h-3.5" />, label: "Email" },
           ].map(({ href, icon, label }) => (
             <a key={label} href={href} target="_blank" rel="noreferrer"
-              className="flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 text-white text-[11px] sm:text-[12px] font-bold transition-colors cursor-pointer">
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 text-white text-[12px] font-bold transition-all cursor-pointer hover:-translate-y-px">
               {icon}
               {label}
             </a>
           ))}
         </div>
       </div>
+      </Reveal>
 
     </div>
   )

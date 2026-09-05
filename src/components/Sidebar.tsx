@@ -1,4 +1,5 @@
 import React from "react"
+import { motion } from "motion/react"
 import {
   User, Cpu, FolderGit2, Briefcase, Mail,
   ChevronLeft, ChevronRight, BadgeCheck, Phone, MapPin,
@@ -50,7 +51,7 @@ const socialLinks = [
 
 /* ── Normal-styled name ── */
 const StyledName = ({ name }: { name: string }) => (
-  <span className="font-semibold text-white text-sm tracking-tight select-none">
+  <span className="font-imperial text-[26px] leading-none text-white select-none">
     {name}
   </span>
 )
@@ -104,28 +105,29 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
     {/* ═══ PROFILE ═══ */}
     {!isCollapsed ? (
-      <div className="mx-3 mt-4 mb-1 rounded-2xl border border-white/[0.06] bg-white/[0.02] overflow-hidden">
+      <div className="mx-3 mt-4 mb-1 rounded-2xl border border-white/[0.07] bg-gradient-to-b from-white/[0.045] to-white/[0.015] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] overflow-hidden">
         {/* Subtle top accent stripe */}
-        <div className="h-[2px] bg-gradient-to-r from-rose-900/0 via-rose-700/50 to-rose-900/0" />
+        <div className="h-[2px] bg-gradient-to-r from-rose-900/0 via-rose-700/60 to-rose-900/0" />
 
         <div className="p-4 flex flex-col items-center text-center gap-3">
           {/* Avatar */}
           <div className="relative mt-1">
+            <div aria-hidden="true" className="absolute -inset-2 rounded-full bg-rose-800/20 blur-xl pointer-events-none" />
             <img
               src={profileData.avatar}
               alt={profileData.name}
-              className="w-[60px] h-[60px] rounded-full object-cover ring-2 ring-rose-700/40 ring-offset-2 ring-offset-[#090102] shadow-lg"
+              className="relative w-[60px] h-[60px] rounded-full object-cover ring-2 ring-rose-700/40 ring-offset-2 ring-offset-[#090102] shadow-lg"
             />
             <span className="absolute bottom-0.5 right-0.5 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-[#090102]" />
           </div>
 
-          {/* Name */}
-          <div className="space-y-1">
-            <div className="flex items-center justify-center gap-1">
+          {/* Name — ditandatangani dengan script */}
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-center gap-1.5">
               <StyledName name={profileData.name} />
               <BadgeCheck className="w-3.5 h-3.5 text-rose-500 shrink-0" />
             </div>
-            <p className="text-[10px] font-mono text-muted-foreground uppercase tracking-[0.2em]">
+            <p className="text-[9px] font-mono text-muted-foreground uppercase tracking-[0.28em]">
               {profileData.title}
             </p>
           </div>
@@ -138,7 +140,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
           {/* Status badge */}
           <div className="flex items-center gap-1.5 text-[10px] text-emerald-400 font-mono font-semibold">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+            <span className="relative flex w-1.5 h-1.5 shrink-0">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60" />
+              <span className="relative inline-flex rounded-full w-1.5 h-1.5 bg-emerald-500" />
+            </span>
             Open to Work
           </div>
         </div>
@@ -178,29 +183,37 @@ export const Sidebar: React.FC<SidebarProps> = ({
             title={isCollapsed ? item.label : undefined}
             aria-current={isActive ? "page" : undefined}
             className={cn(
-              "w-full flex items-center gap-3 rounded-xl text-[13px] font-medium transition-all duration-150 group cursor-pointer",
+              "relative w-full flex items-center gap-3 rounded-xl text-[13px] font-medium transition-colors duration-150 group cursor-pointer overflow-hidden",
               isCollapsed ? "justify-center px-0 py-2.5" : "px-3 py-2.5",
               isActive
-                ? "bg-rose-950/70 text-white border border-rose-800/40"
+                ? "text-white"
                 : "text-muted-foreground hover:text-white hover:bg-white/[0.04]"
             )}
           >
+            {/* Pill aktif yang meluncur antar item */}
+            {isActive && (
+              <motion.span
+                layoutId="sideNavActive"
+                transition={{ type: "spring", stiffness: 400, damping: 32 }}
+                className="absolute inset-0 rounded-xl bg-gradient-to-r from-rose-950/80 via-rose-950/40 to-transparent border border-rose-800/40"
+              />
+            )}
             {/* Active indicator stripe */}
-            {isActive && !isCollapsed && (
-              <span className="absolute left-0 w-0.5 h-5 bg-rose-500 rounded-r-full" />
+            {isActive && (
+              <span className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 bg-rose-500 rounded-r-full shadow-[0_0_8px_rgba(244,63,94,0.7)]" />
             )}
 
             <Icon className={cn(
-              "w-4 h-4 shrink-0 transition-transform duration-150",
+              "relative w-4 h-4 shrink-0 transition-transform duration-150",
               isActive ? "text-rose-400" : "text-muted-foreground/70 group-hover:text-white group-hover:scale-105"
             )} />
 
             {!isCollapsed && (
               <>
-                <span className="flex-1 text-left">{item.label}</span>
+                <span className="relative flex-1 text-left">{item.label}</span>
                 {item.count && (
                   <span className={cn(
-                    "text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-md",
+                    "relative text-[10px] font-mono font-bold px-1.5 py-0.5 rounded-md",
                     isActive ? "bg-rose-800/50 text-rose-300" : "bg-white/[0.05] text-muted-foreground/60"
                   )}>
                     {item.count}

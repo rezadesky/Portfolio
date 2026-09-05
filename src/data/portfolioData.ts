@@ -33,6 +33,7 @@ export interface Experience {
 
 export const profileData = {
   name: "Reza Saputra",
+  alias: "Reza Desky",
   avatar: "https://avatars.githubusercontent.com/u/104095833?v=4",
   title: "Full Stack Web Developer",
   education: "S1 Teknologi Informasi UIN Ar-Raniry",
@@ -45,7 +46,7 @@ export const profileData = {
   github: "https://github.com/rezadesky",
   linkedin: "https://www.linkedin.com/in/reza-saputra-3127b2297/",
   bio: "Full Stack Web Developer dari Banda Aceh, Indonesia yang fokus membangun aplikasi web modern, responsif, dan mudah digunakan.",
-  bioMain1: "Saya Full Stack Web Developer yang berfokus pada Frontend dan Backend Development. Setiap hari saya membangun aplikasi web menggunakan React, HTML, CSS, JavaScript, PHP, Laravel, dan MySQL — dari antarmuka yang responsif hingga backend dan database yang andal. Selama masa studi S1 Teknologi Informasi, saya mengerjakan berbagai proyek web development nyata dan terus mengasah kemampuan sebagai calon Software Engineer.",
+  bioMain1: "Saya Reza Saputra — banyak yang mengenal saya sebagai Reza Desky — Full Stack Web Developer yang berfokus pada Frontend dan Backend Development. Setiap hari saya membangun aplikasi web menggunakan React, HTML, CSS, JavaScript, PHP, Laravel, dan MySQL — dari antarmuka yang responsif hingga backend dan database yang andal. Selama masa studi S1 Teknologi Informasi, saya mengerjakan berbagai proyek web development nyata dan terus mengasah kemampuan sebagai calon Software Engineer.",
   bioMain2: "Saya percaya teknologi memberikan solusi nyata bagi berbagai permasalahan. Karena itu saya selalu menulis kode yang rapi, mudah dipelihara, dan mengikuti praktik terbaik pengembangan perangkat lunak. Saat ini saya terbuka untuk magang, kolaborasi, maupun proyek freelance yang membantu saya berkembang sebagai Full Stack Developer dan Software Engineer profesional.",
   bioShort: "Full Stack Web Developer dari Banda Aceh, Indonesia. Membangun aplikasi web modern dan responsif dengan React, Laravel, PHP, dan MySQL. Terus belajar teknologi baru melalui proyek nyata.",
   skillsDescription: "Sebagai Full Stack Developer, saya berpengalaman membangun aplikasi web dari frontend hingga backend: antarmuka responsif dengan React dan Tailwind CSS, pengelolaan database MySQL, serta Git untuk kolaborasi. Saya juga terus mengembangkan soft skill seperti komunikasi, kerja sama tim, dan pemecahan masalah demi mendukung proses pengembangan perangkat lunak.",

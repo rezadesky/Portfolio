@@ -3,6 +3,9 @@
 @import "@fontsource/plus-jakarta-sans/latin-600.css";
 @import "@fontsource/plus-jakarta-sans/latin-700.css";
 @import "@fontsource/plus-jakarta-sans/latin-800.css";
+@import "@fontsource/jetbrains-mono/latin-400.css";
+@import "@fontsource/jetbrains-mono/latin-500.css";
+@import "@fontsource/jetbrains-mono/latin-700.css";
 @import "@fontsource/imperial-script/latin.css";
 @import "tailwindcss";
 
@@ -10,14 +13,14 @@
 
 @theme {
   --font-sans: 'Plus Jakarta Sans', sans-serif;
-  --font-mono: 'Plus Jakarta Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
   --font-script: 'Imperial Script', cursive;
-  --animate-fade-in: fade-in 0.18s ease-out;
+  --animate-fade-in: fade-in 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @keyframes fade-in {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(10px) scale(0.996); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -28,6 +31,35 @@
 
 .font-imperial {
   font-family: 'Imperial Script', cursive !important;
+}
+
+/* Film grain — tekstur halus supaya permukaan gelap terasa "dibuat tangan", bukan flat digital */
+.bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* Titik grid samar dengan wangi rose — memberi struktur seperti kertas blueprint */
+.bg-dotgrid {
+  background-image: radial-gradient(rgba(190, 18, 60, 0.14) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+/* Spotlight kartu — kilau lembut yang mengikuti kursor */
+.spotlight {
+  position: relative;
+}
+.spotlight-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, 0.06), transparent 65%);
+  pointer-events: none;
+}
+.spotlight:hover .spotlight-overlay {
+  opacity: 1;
 }
 
 @layer base {
@@ -43,7 +75,7 @@
     --secondary: 350 40% 9%;
     --secondary-foreground: 0 0% 96%;
     --muted: 350 35% 8.5%;
-    --muted-foreground: 350 15% 58%;
+    --muted-foreground: 350 10% 64%;
     --accent: 348 50% 12%;
     --accent-foreground: 348 80% 90%;
     --destructive: 0 62.8% 30.6%;
@@ -74,10 +106,24 @@
     color: hsl(var(--foreground));
     letter-spacing: -0.01em;
     line-height: 1.6;
+    font-feature-settings: "ss01" on, "cv11" on;
   }
 
   code, kbd, pre, input, textarea, button, select {
     font-family: 'Plus Jakarta Sans', sans-serif !important;
+  }
+
+  /* Tipografi: judul seimbang, paragraf rapi di tepi */
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+
+  .font-mono, code.font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, Consolas, monospace !important;
+    letter-spacing: 0;
   }
 
   /* Premium scrollbar */

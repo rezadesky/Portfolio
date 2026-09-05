@@ -1,5 +1,5 @@
-import { useEffect, useState, type ReactNode } from "react"
-import { MotionConfig, motion } from "motion/react"
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react"
+import { MotionConfig, motion, useMotionValue, useReducedMotion, useScroll, useSpring } from "motion/react"
 import { Sidebar, type NavTab, navItems } from "@/components/Sidebar"
 import { AboutSection } from "@/components/AboutSection"
 import { ProjectsSection } from "@/components/ProjectsSection"
@@ -41,6 +41,32 @@ function navigateTo(tab: NavTab) {
 export default function App() {
   const [activeTab, setActiveTab] = useState<NavTab>(getTabFromHash)
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false)
+  const [finePointer, setFinePointer] = useState(false)
+  const reducedMotion = useReducedMotion()
+
+  // Progres baca pada konten yang aktif
+  const mainRef = useRef<HTMLElement | null>(null)
+  const { scrollYProgress } = useScroll({ container: mainRef })
+  const progressScale = useSpring(scrollYProgress, { stiffness: 140, damping: 28, mass: 0.4 })
+
+  // Cahaya ambien yang mengikuti kursor (hanya pointer presisi, hormati reduced motion)
+  const glowX = useMotionValue(-800)
+  const glowY = useMotionValue(-800)
+  const glowSpringX = useSpring(glowX, { stiffness: 55, damping: 18 })
+  const glowSpringY = useSpring(glowY, { stiffness: 55, damping: 18 })
+
+  useEffect(() => {
+    const mq = window.matchMedia("(pointer: fine)")
+    const update = () => setFinePointer(mq.matches)
+    update()
+    mq.addEventListener("change", update)
+    return () => mq.removeEventListener("change", update)
+  }, [])
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    glowX.set(e.clientX)
+    glowY.set(e.clientY)
+  }, [glowX, glowY])
 
   useEffect(() => {
     const onHashChange = () => setActiveTab(getTabFromHash())
@@ -49,7 +75,7 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    document.title = `${TAB_TITLES[activeTab]} — Reza Saputra | Web Developer Indonesia`
+    document.title = `${TAB_TITLES[activeTab]} — Reza Saputra (Reza Desky) | Portfolio Web Developer`
   }, [activeTab])
 
   const handleTabChange = (tab: NavTab) => {
@@ -61,7 +87,8 @@ export default function App() {
     <MotionConfig reducedMotion="user">
       <div
         className="flex h-[100dvh] overflow-hidden text-foreground relative"
-        style={{ background: "radial-gradient(ellipse 80% 60% at 60% 40%, #1a0308 0%, #0b0103 40%, #050001 100%)" }}
+        style={{ background: "radial-gradient(ellipse 90% 70% at 68% 18%, #170309 0%, #0b0103 46%, #040101 100%)" }}
+        onMouseMove={handleMouseMove}
       >
         {/* Skip link */}
         <a
@@ -75,6 +102,24 @@ export default function App() {
         <div aria-hidden="true" className="absolute top-0 left-1/3 w-[700px] h-[500px] bg-rose-950/20 blur-[200px] rounded-full pointer-events-none" />
         <div aria-hidden="true" className="absolute bottom-0 right-1/4 w-[500px] h-[400px] bg-rose-900/10 blur-[180px] rounded-full pointer-events-none" />
 
+        {/* Film grain di atas seluruh permukaan */}
+        <div aria-hidden="true" className="bg-grain absolute inset-0 z-[70] opacity-[0.05] pointer-events-none mix-blend-overlay" />
+
+        {/* Cahaya ambien mengikuti kursor */}
+        {finePointer && !reducedMotion && (
+          <motion.div
+            aria-hidden="true"
+            className="pointer-events-none fixed left-0 top-0 z-[5] h-[640px] w-[640px] rounded-full"
+            style={{
+              x: glowSpringX,
+              y: glowSpringY,
+              marginLeft: -320,
+              marginTop: -320,
+              background: "radial-gradient(circle, rgba(225,29,72,0.08) 0%, rgba(190,18,60,0.035) 38%, transparent 70%)",
+            }}
+          />
+        )}
+
         {/* ── Desktop Sidebar ── */}
         <div className="hidden md:block shrink-0 z-30">
           <Sidebar
@@ -87,6 +132,18 @@ export default function App() {
 
         {/* ── Main content ── */}
         <div className="flex-1 flex flex-col min-w-0 overflow-hidden relative z-10">
+          {/* Progres baca */}
+          <motion.div
+            aria-hidden="true"
+            className="absolute top-0 left-0 right-0 z-40 h-[2px] origin-left"
+            style={{ scaleX: progressScale, background: "linear-gradient(90deg, #9f1239 0%, #fb7185 100%)" }}
+          />
+          {/* Dot grid samar, memudar ke tepi */}
+          <div
+            aria-hidden="true"
+            className="bg-dotgrid absolute inset-0 pointer-events-none opacity-[0.35]"
+            style={{ maskImage: "radial-gradient(ellipse 70% 55% at 50% 35%, black 0%, transparent 75%)", WebkitMaskImage: "radial-gradient(ellipse 70% 55% at 50% 35%, black 0%, transparent 75%)" }}
+          />
 
           {/* Mobile top bar */}
           <header className="md:hidden flex items-center justify-center px-4 h-12 border-b border-white/[0.05] bg-[#0b0103]/80 backdrop-blur-md shrink-0 z-20">
@@ -103,9 +160,10 @@ export default function App() {
           {/* Scrollable content */}
           <main
             id="main-scroll"
-            className="flex-1 overflow-y-auto px-4 py-5 sm:px-6 sm:py-6 md:px-8 md:py-8 lg:px-12 lg:py-10"
+            ref={mainRef}
+            className="flex-1 overflow-y-auto px-4 py-5 sm:px-6 sm:py-6 md:px-8 md:py-8 lg:px-12 lg:py-10 relative"
           >
-            <div className="max-w-4xl mx-auto pb-20 md:pb-0" aria-live="polite">
+            <div className="max-w-4xl mx-auto pb-20 md:pb-0 relative" aria-live="polite">
               {VALID_TABS.map((tab) => (
                 <div
                   key={tab}
@@ -115,6 +173,19 @@ export default function App() {
                   {sections[tab]()}
                 </div>
               ))}
+
+              {/* Footer — identitas konsisten untuk mesin pencari */}
+              <footer className="mt-12 md:mt-16 pt-6 border-t border-white/5 pb-2 text-center space-y-1.5">
+                <p className="font-imperial text-2xl text-rose-500/80 leading-none select-none">
+                  Reza Saputra
+                </p>
+                <p className="font-mono text-[10px] text-muted-foreground/60 uppercase tracking-[0.2em]">
+                  Reza Saputra · Reza Desky · Reza Saputra Desky
+                </p>
+                <p className="font-mono text-[9px] text-muted-foreground/40 uppercase tracking-[0.18em]">
+                  © {new Date().getFullYear()} — Full Stack Web Developer · Banda Aceh, Indonesia
+                </p>
+              </footer>
             </div>
           </main>
         </div>

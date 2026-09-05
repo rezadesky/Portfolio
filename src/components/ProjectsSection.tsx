@@ -2,6 +2,9 @@ import React from "react"
 import { ExternalLink, CheckCircle2 } from "lucide-react"
 import { projectsData } from "@/data/portfolioData"
 import { TechLogo } from "./TechLogos"
+import { SectionHeading } from "./SectionHeading"
+import { Reveal } from "./Reveal"
+import { SpotlightCard } from "./SpotlightCard"
 
 const GithubIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="currentColor">
@@ -10,39 +13,34 @@ const GithubIcon = ({ className }: { className?: string }) => (
 )
 
 export const ProjectsSection: React.FC = () => (
-  <div className="space-y-7 sm:space-y-10 pb-4">
+  <div className="space-y-8 sm:space-y-12 pb-4">
 
     {/* ── Header ── */}
-    <div className="space-y-2 sm:space-y-3">
-        <h2 aria-label="Proyek" className="flex items-baseline gap-1.5 select-none">
-          <span aria-hidden="true" className="font-imperial text-6xl sm:text-7xl text-rose-500 leading-none">P</span>
-          <span aria-hidden="true" className="text-2xl sm:text-3xl font-black text-white tracking-tight uppercase">rojects</span>
-        </h2>
-      <p className="text-xs sm:text-sm text-muted-foreground max-w-xl leading-relaxed">
-        Beberapa proyek yang telah saya kerjakan selama masa studi dan pembelajaran mandiri.
-      </p>
-      <div className="w-10 h-[2px] bg-gradient-to-r from-rose-600 to-rose-900/0 rounded-full" />
-    </div>
+    <SectionHeading
+      script="P"
+      rest="rojects"
+      ariaLabel="Proyek"
+      index="03"
+      description="Beberapa proyek yang telah saya kerjakan selama masa studi dan pembelajaran mandiri."
+    />
 
     {/* ── Cards ── */}
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
       {projectsData.map((project, index) => (
-        <div
-          key={project.id}
-          className="group rounded-2xl border border-white/6 bg-white/[0.025] hover:border-rose-900/40 hover:bg-white/[0.04] transition-all duration-300 overflow-hidden flex flex-col"
-        >
-          {/* Image container - fits exact image aspect ratio */}
-          <div className="relative w-full overflow-hidden bg-rose-950/20 border-b border-white/5">
+        <Reveal key={project.id} delay={(index % 2) * 0.07} className="h-full">
+        <SpotlightCard className="group flex h-full flex-col rounded-2xl border border-white/[0.07] bg-gradient-to-b from-white/[0.04] to-white/[0.015] shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] hover:border-rose-900/50 hover:-translate-y-1 hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.05),0_20px_40px_-20px_rgba(0,0,0,0.8)] transition-all duration-300 overflow-hidden">
+          {/* Image container — rasio seragam agar grid sejajar */}
+          <div className="relative w-full aspect-[16/10] overflow-hidden bg-rose-950/20 border-b border-white/5">
             <img
               src={project.image}
               alt={project.title}
               loading={index < 2 ? "eager" : "lazy"}
               fetchPriority={index < 2 ? "high" : "low"}
               decoding="async"
-              className="w-full h-auto block object-cover group-hover:scale-102 transition-transform duration-500"
+              className="w-full h-full object-cover object-top group-hover:scale-[1.04] transition-transform duration-500 ease-out"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#090102]/80 via-transparent to-transparent opacity-40 pointer-events-none" />
-            <span className="absolute bottom-2.5 left-3 text-[9px] sm:text-[10px] font-mono px-2.5 py-0.5 rounded-md bg-black/80 text-rose-300 border border-rose-900/40 backdrop-blur-sm uppercase tracking-wider z-10 shadow-md">
+            <span className="absolute bottom-2.5 left-3 text-[9px] sm:text-[10px] font-mono px-2.5 py-1 rounded-md bg-black/80 text-rose-300 border border-rose-900/40 backdrop-blur-sm uppercase tracking-[0.14em] z-10 shadow-md">
               {project.category}
             </span>
           </div>
@@ -50,10 +48,10 @@ export const ProjectsSection: React.FC = () => (
           {/* Body */}
           <div className="p-4 sm:p-5 flex flex-col gap-3 sm:gap-4 flex-1">
             <div>
-              <h3 className="font-bold text-[14px] sm:text-[15px] text-white group-hover:text-rose-300 transition-colors">
+              <h3 className="font-bold text-[15px] text-white group-hover:text-rose-300 transition-colors">
                 {project.title}
               </h3>
-              <p className="text-[11px] sm:text-[12px] text-muted-foreground leading-relaxed mt-1.5">
+              <p className="text-[12px] sm:text-[13px] text-muted-foreground leading-relaxed mt-1.5">
                 {project.description}
               </p>
             </div>
@@ -63,7 +61,7 @@ export const ProjectsSection: React.FC = () => (
               {project.tags.map((tag, idx) => (
                 <span
                   key={idx}
-                  className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 rounded-lg border border-white/6 bg-white/[0.03] text-[10px] sm:text-[11px] font-semibold text-muted-foreground"
+                  className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-2.5 py-1 rounded-lg border border-white/[0.06] bg-white/[0.03] text-[10px] sm:text-[11px] font-semibold text-muted-foreground"
                 >
                   <TechLogo name={tag} className="w-2.5 h-2.5 sm:w-3 sm:h-3 shrink-0" />
                   {tag}
@@ -93,13 +91,13 @@ export const ProjectsSection: React.FC = () => (
           </div>
 
           {/* Footer */}
-          <div className="px-4 sm:px-5 py-3 border-t border-white/5 flex items-center gap-2">
+          <div className="px-4 sm:px-5 py-3 border-t border-white/5 flex items-center gap-2 mt-auto">
             {project.demoUrl && (
               <a
                 href={project.demoUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-rose-700 hover:bg-rose-600 text-white text-[11px] sm:text-[12px] font-bold transition-colors cursor-pointer shadow-sm"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-rose-700 hover:bg-rose-600 text-white text-[12px] font-bold transition-all cursor-pointer shadow-[0_10px_24px_-12px_rgba(225,29,72,0.6)] hover:shadow-[0_12px_28px_-10px_rgba(225,29,72,0.7)]"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
                 Live Demo
@@ -110,14 +108,15 @@ export const ProjectsSection: React.FC = () => (
                 href={project.githubUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl border border-white/8 bg-white/[0.03] hover:bg-white/[0.07] text-foreground text-[11px] sm:text-[12px] font-bold transition-colors cursor-pointer"
+                className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl border border-white/[0.08] bg-white/[0.03] hover:bg-white/[0.07] text-foreground text-[12px] font-bold transition-colors cursor-pointer"
               >
                 <GithubIcon className="w-3.5 h-3.5" />
                 Source Code
               </a>
             )}
           </div>
-        </div>
+        </SpotlightCard>
+        </Reveal>
       ))}
     </div>
   </div>
