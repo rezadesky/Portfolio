@@ -1,32 +1,73 @@
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+# 🌐 Developer Portfolio
 
-Currently, two official plugins are available:
+**Personal developer portfolio showcasing full-stack projects, technical experience, and contact channels.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[![Live Demo](https://img.shields.io/badge/Demo-rezasaputradesky.work-0284c7?style=for-the-badge&logo=googlechrome&logoColor=white)](https://rezasaputradesky.work)
+[![React](https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-Bundler-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 
-## React Compiler
+</div>
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the Oxlint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- **Responsive & Modern UI**: Built with mobile-first principles and smooth interactions.
+- **Projects Showcase**: Interactive view of featured full-stack applications with GitHub links and live demos.
+- **Skill Ecosystem**: Categorized breakdown of frontend, backend, database, and dev tools.
+- **Fast Performance**: Blazing-fast page loads powered by Vite bundling and optimized assets.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
-```
+---
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## 🛠️ Tech Stack
+
+- **Framework**: React 18
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Icons**: Lucide React
+- **Build Tool**: Vite
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18.0.0 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/rezadesky/Portfolio.git
+   cd Portfolio
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+4. Build for production:
+   ```bash
+   npm run build
+   ```
+
+---
+
+## 📬 Contact & Connect
+
+- **Author**: Reza Saputra Desky
+- **Website**: [rezasaputradesky.work](https://rezasaputradesky.work)
+- **Email**: rezasaputradesky@gmail.com
+- **LinkedIn**: [Reza Saputra Desky](https://linkedin.com/in/rezadesky)
