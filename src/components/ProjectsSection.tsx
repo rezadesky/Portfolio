@@ -100,7 +100,7 @@ export const ProjectsSection: React.FC = () => (
                 className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-rose-700 hover:bg-rose-600 text-white text-[12px] font-bold transition-all cursor-pointer shadow-[0_10px_24px_-12px_rgba(225,29,72,0.6)] hover:shadow-[0_12px_28px_-10px_rgba(225,29,72,0.7)]"
               >
                 <ExternalLink className="w-3.5 h-3.5" />
-                Live Demo
+                Live
               </a>
             )}
             {project.githubUrl && (
