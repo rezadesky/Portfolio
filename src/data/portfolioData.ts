@@ -110,6 +110,24 @@ export const skillsCategories: SkillCategory[] = [
 
 export const projectsData: Project[] = [
   {
+    id: "proj-0",
+    title: "Ideostore - Platform Layanan Aplikasi Premium",
+    category: "Web Application",
+    description: "Platform e-commerce digital store penyedia langganan aplikasi premium terpercaya, akun AI, produktivitas, dan hiburan dengan integrasi sistem pembayaran otomatis QRIS instan.",
+    image: "/images/ideostore.png",
+    tags: ["Web Development", "E-Commerce", "QRIS Payment Gateway", "Full Stack", "Tailwind CSS"],
+    features: [
+      "Katalog produk aplikasi premium & akun AI",
+      "Sistem pembayaran otomatis QRIS instan",
+      "Pengiriman detail akun otomatis via WhatsApp",
+      "Halaman pelacakan status pesanan real-time",
+      "Mode tampilan dark/light responsive",
+      "Panel kelola produk dan varian langganan",
+    ],
+    githubUrl: "",
+    demoUrl: "https://ideostore.ideolog.tech/",
+  },
+  {
     id: "proj-1",
     title: "Website IdeologTech",
     category: "Web Application",
