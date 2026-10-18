@@ -110,6 +110,24 @@ export const skillsCategories: SkillCategory[] = [
 
 export const projectsData: Project[] = [
   {
+    id: "proj-yabat",
+    title: "YABAT PRESENSI - Portal Presensi Yayasan",
+    category: "Web Application",
+    description: "Sistem informasi presensi dan portal manajemen administrasi Yayasan Anak Bangsa Aceh Tenggara (YABAT) & STKIP Usman Safri yang mendukung akses multi-device dan Mobile PWA.",
+    image: "/images/yabat-presensi.png",
+    tags: ["Web Development", "Laravel", "MySQL", "Tailwind CSS", "PWA", "Full Stack"],
+    features: [
+      "Portal manajemen & panel administrator yayasan",
+      "Sistem pencatatan presensi digital terintegrasi",
+      "Mendukung akses web responsif dan Mobile PWA",
+      "Autentikasi keamanan akun administrator",
+      "Manajemen data presensi pegawai dan staf",
+      "Laporan dan rekapitulasi kehadiran",
+    ],
+    githubUrl: "",
+    demoUrl: "https://yabatpresensi.stkip-us.ac.id/",
+  },
+  {
     id: "proj-0",
     title: "Ideostore - Platform Layanan Aplikasi Premium",
     category: "Web Application",
